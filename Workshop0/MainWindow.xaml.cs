@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Workshop0
 {
@@ -16,9 +17,14 @@ namespace Workshop0
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ScriptCollection? _scripts = null;
+
         public MainWindow()
         {
             InitializeComponent();
+            _scripts = new ScriptCollection() { Path = "" };
+            _scripts.InitTestData();
+            DataContext = _scripts;
         }
 
         #region File Menu
@@ -28,6 +34,11 @@ namespace Workshop0
             {
                 user.Login += "+";
             }
+        }
+
+        private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private void MenuFileQuit_Click(object sender, RoutedEventArgs e)

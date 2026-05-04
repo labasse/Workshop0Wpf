@@ -21,6 +21,7 @@
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="_Fichier">
                 <MenuItem Header="_Nouveau" Click="MenuFileNew_Click"/>
+                <MenuItem Header="_Ouvrir" Click="MenuFileOpen_Click"/>
                 <Separator/>
                 <MenuItem 
                     Header="_Quitter" 
@@ -42,7 +43,27 @@
                 <TreeViewItem Header="Fichier 4"/>
             </TreeViewItem>
         </TreeView>
-        <ListView Grid.Column="1" Grid.Row="1"></ListView>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <ComboBox 
+                ItemsSource="{Binding Types}"
+                x:Name="Filter"
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} ({1})">
+                                    <Binding Path="ScriptType"/>
+                                    <Binding Path="Count"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <!--TextBlock Text="{Binding SelectedItem.Path, ElementName=Filter}"/-->
+            <ListView />
+        </StackPanel>
         <GridSplitter Grid.Row ="1" Grid.Column="0" 
                       ResizeDirection="Columns"/>
         <ScrollViewer Grid.Column="2" Grid.Row="1" VerticalScrollBarVisibility="Auto">

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scripts>
+	<script name="Script B" type="install" path="./scriptb.bat">		
+	</script>
+	<script name="Script A" type="check" path="./scripta.bat">
+	</script>
+	<script name="Script C" type="check" path="./scriptc.bat">
+	</script>
+	<script name="Script D" type="remediation" path="./scriptd.bat">
+	</script>
+</scripts>
