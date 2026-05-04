@@ -22,17 +22,20 @@ namespace Workshop0
             Scripts.Add(new Script { Name = "Remediate Git"     , Type = ScriptType.Remediation, Path = @"C:\Scripts\install_git.ps1" });
         }
 
-        public static ScriptCollection? Load(Stream s)
+        public static ScriptCollection Load(Stream s)
         {
             var serializer = new XmlSerializer(typeof(ScriptCollection));
 
-            return (ScriptCollection?)serializer.Deserialize(s);
+            return (ScriptCollection)(
+                serializer.Deserialize(s) 
+                ?? throw new NullReferenceException("Unexpected null result")
+            );
         }
 
+        [XmlElement("script")]
         public ObservableCollection<Script> Scripts { get; set; } = new ObservableCollection<Script>();
 
-        public required string Path { get; set; }
-
+        public string Path { get; set; } = string.Empty;
 
         public IEnumerable<object> Types         {
             get => Scripts
