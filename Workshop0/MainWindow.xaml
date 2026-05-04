@@ -6,19 +6,7 @@
         xmlns:local="clr-namespace:Workshop0"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="25*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <GridSplitter Grid.Row ="1" Grid.Column="0" 
-                      ResizeDirection="Columns" Width="4"/>
+    <Grid ColumnDefinitions="25*, 50*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="_Fichier">
                 <MenuItem Header="_Nouveau"/>
@@ -40,13 +28,21 @@
             </TreeViewItem>
         </TreeView>
         <ListView Grid.Column="1" Grid.Row="1"></ListView>
-        <StackPanel Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Détail" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Label Content="Nom"/>
-            <TextBox Text=""/>
-            <Label Content="Type"/>
-            <ComboBox/>
-        </StackPanel>
+        <GridSplitter Grid.Row ="1" Grid.Column="0" 
+                      ResizeDirection="Columns"/>
+        <ScrollViewer Grid.Column="2" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Style="{StaticResource Title1}">
+                    <TextBlock.Text>Détail</TextBlock.Text>
+                </TextBlock>
+                <Label Content="Nom"/>
+                <TextBox Text=""/>
+                <Label Content="Type"/>
+                <ComboBox/>
+            </StackPanel>
+        </ScrollViewer>
+        <GridSplitter Grid.Row ="1" Grid.Column="1" 
+            ResizeDirection="Columns"/>
         <StatusBar Grid.Row="2" Grid.ColumnSpan="3">
             <StatusBarItem HorizontalAlignment="Stretch">
                 <TextBlock>Prêt</TextBlock>

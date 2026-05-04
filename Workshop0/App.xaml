@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:Workshop0"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock" x:Key="Title1">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="FrameworkElement" x:Key="Common">
+            <Setter Property="Margin" Value="10, 5, 10, 0"/>
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource Common}"/><!-- Basé sur le style précédemment nommé "Common" -->
+        <Style TargetType="TextBox" BasedOn="{StaticResource Common}"/>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource Common}"/>
+        <Style TargetType="GridSplitter">
+            <Setter Property="Width" Value="4"/>
+        </Style>
     </Application.Resources>
 </Application>
