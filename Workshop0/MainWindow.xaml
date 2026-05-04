@@ -1,0 +1,59 @@
+﻿<Window x:Class="Workshop0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Workshop0"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Row ="1" Grid.Column="0" 
+                      ResizeDirection="Columns" Width="4"/>
+        <Menu Grid.ColumnSpan="3">
+            <MenuItem Header="_Fichier">
+                <MenuItem Header="_Nouveau"/>
+                <Separator/>
+                <MenuItem Header="_Quitter" InputGestureText="Ctrl+Q"/>
+            </MenuItem>
+            <MenuItem Header="_?">
+                <MenuItem Header="_A propose de..."/>
+            </MenuItem>
+        </Menu>
+        <TreeView Grid.Row="1" Grid.Column="0">
+            <TreeViewItem Header="Dossier 1">
+                <TreeViewItem Header="Fichier 1"/>
+                <TreeViewItem Header="Fichier 2"/>
+            </TreeViewItem>
+            <TreeViewItem Header="Dossier 2">
+                <TreeViewItem Header="Fichier 3"/>
+                <TreeViewItem Header="Fichier 4"/>
+            </TreeViewItem>
+        </TreeView>
+        <ListView Grid.Column="1" Grid.Row="1"></ListView>
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Détail" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Label Content="Nom"/>
+            <TextBox Text=""/>
+            <Label Content="Type"/>
+            <ComboBox/>
+        </StackPanel>
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="3">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <TextBlock>Prêt</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ProgressBar Width="100" Height="16" Value="50"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
