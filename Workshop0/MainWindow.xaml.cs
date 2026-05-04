@@ -20,5 +20,20 @@ namespace Workshop0
         {
             InitializeComponent();
         }
+
+        #region File Menu
+        private void MenuFileNew_Click(object sender, RoutedEventArgs e)
+        {
+            if (FindResource("user") is User user)
+            {
+                user.Login += "+";
+            }
+        }
+
+        private void MenuFileQuit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        #endregion
     }
 }

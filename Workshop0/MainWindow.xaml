@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Height="450" Width="800">
     <Window.Resources>
-        <local:User x:Key="user" Login="???"/>
+        <local:User x:Key="user" Login="???" x:Name="user" />
     </Window.Resources>
     <Window.Title>
         <Binding Path="Login" Source="{StaticResource user}" StringFormat="{}Workshop 0 ({0})"/>
@@ -15,9 +15,13 @@
     <Grid ColumnDefinitions="25*, 50*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="_Fichier">
-                <MenuItem Header="_Nouveau"/>
+                <MenuItem Header="_Nouveau" Click="MenuFileNew_Click"/>
                 <Separator/>
-                <MenuItem Header="_Quitter" InputGestureText="Ctrl+Q"/>
+                <MenuItem 
+                    Header="_Quitter" 
+                    InputGestureText="Ctrl+Q"
+                    Click="MenuFileQuit_Click"
+                    />
             </MenuItem>
             <MenuItem Header="_?">
                 <MenuItem Header="_A propose de..."/>
