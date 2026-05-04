@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Workshop0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Height="450" Width="800">
+    <Window.Resources>
+        <local:User x:Key="user" Login="???"/>
+    </Window.Resources>
+    <Window.Title>
+        <Binding Path="Login" Source="{StaticResource user}" StringFormat="{}Workshop 0 ({0})"/>
+    </Window.Title>
     <Grid ColumnDefinitions="25*, 50*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="_Fichier">
@@ -31,12 +37,14 @@
         <GridSplitter Grid.Row ="1" Grid.Column="0" 
                       ResizeDirection="Columns"/>
         <ScrollViewer Grid.Column="2" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
+            <StackPanel DataContext="{StaticResource user}">
                 <TextBlock Style="{StaticResource Title1}">
                     <TextBlock.Text>Détail</TextBlock.Text>
                 </TextBlock>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding Login, FallbackValue=(oups), TargetNullValue='(non connecté)'}"/>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding LoggedDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
                 <Label Content="Nom"/>
-                <TextBox Text=""/>
+                <TextBox Text="{Binding Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
                 <Label Content="Type"/>
                 <ComboBox/>
             </StackPanel>
