@@ -8,6 +8,11 @@
         Height="450" Width="800">
     <Window.Resources>
         <local:User x:Key="user" Login="???" x:Name="user" />
+        <local:TimeSpanBrushConverter 
+            x:Key="TimeSpanBrushConverter" 
+            WarningTime="0:0:20" WarningColor="Orange"
+            AlertTime="0:0:40" AlertColor="LightSalmon"
+            />
     </Window.Resources>
     <Window.Title>
         <Binding Path="Login" Source="{StaticResource user}" StringFormat="{}Workshop 0 ({0})"/>
@@ -46,7 +51,12 @@
                     <TextBlock.Text>Détail</TextBlock.Text>
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Center" Text="{Binding Login, FallbackValue=(oups), TargetNullValue='(non connecté)'}"/>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding LoggedDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
+                <TextBlock HorizontalAlignment="Center" 
+                           Text="{Binding LoggedDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
+                           Background="{Binding 
+                                LoggedDuration, 
+                                Converter={StaticResource TimeSpanBrushConverter},
+                                FallbackValue='Coral'}"/>
                 <Label Content="Nom"/>
                 <TextBox Text="{Binding Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
                 <Label Content="Type"/>
