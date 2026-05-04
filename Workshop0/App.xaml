@@ -21,6 +21,7 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="ComboBox" BasedOn="{StaticResource Common}"/>
+        <Style TargetType="ListView" BasedOn="{StaticResource Common}"/>
         <Style TargetType="GridSplitter">
             <Setter Property="Width" Value="4"/>
         </Style>

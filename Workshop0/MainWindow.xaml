@@ -13,6 +13,13 @@
             WarningTime="0:0:20" WarningColor="Orange"
             AlertTime="0:0:40" AlertColor="LightSalmon"
             />
+        <CollectionViewSource Source="{Binding Scripts}" 
+                              x:Key="FilteredScripts"
+                              IsLiveGroupingRequested="True">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Type"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
     </Window.Resources>
     <Window.Title>
         <Binding Path="Login" Source="{StaticResource user}" StringFormat="{}Workshop 0 ({0})"/>
@@ -62,7 +69,32 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <!--TextBlock Text="{Binding SelectedItem.Path, ElementName=Filter}"/-->
-            <ListView />
+            <ListView ItemsSource="{Binding Source={StaticResource FilteredScripts}}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Path">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path}" FontFamily="Courier New"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn> 
+                    </GridView>
+                </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border BorderBrush="Gray" BorderThickness="0,0,0,1" Margin="0,0,0,5"/>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
         </StackPanel>
         <GridSplitter Grid.Row ="1" Grid.Column="0" 
                       ResizeDirection="Columns"/>
