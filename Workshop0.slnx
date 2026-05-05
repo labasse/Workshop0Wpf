@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Workshop0/Workshop0.csproj" />
+  <Project Path="Workshop0Test/Workshop0Test.csproj" />
 </Solution>
