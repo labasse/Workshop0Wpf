@@ -56,7 +56,7 @@ namespace Workshop0
             {
                 field = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ScriptColl)));
-                FilteredScripts = CollectionViewSource.GetDefaultView(ScriptColl.Scripts);
+                FilteredScripts = new CollectionViewSource() { Source = ScriptColl.Scripts }.View;
             }
         }
 
