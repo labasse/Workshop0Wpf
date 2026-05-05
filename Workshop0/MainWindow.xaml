@@ -31,6 +31,9 @@
     </Window.Title>
     <Window.InputBindings>
         <KeyBinding Key="Q" Modifiers="Control" Command="{Binding FileQuit}"/>
+        <KeyBinding Key="X" Modifiers="Control" Command="ApplicationCommands.Cut"/>
+        <KeyBinding Key="C" Modifiers="Control" Command="ApplicationCommands.Copy"/>
+        <KeyBinding Key="V" Modifiers="Control" Command="ApplicationCommands.Paste"/>
     </Window.InputBindings>
     <Grid ColumnDefinitions="25*, 50*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="3">
@@ -55,7 +58,7 @@
         </Menu>
         <TreeView Grid.Row="1" Grid.Column="0" 
                  ItemsSource="{Binding ScriptColl.Scripts}"
-                  dbg:PresentationTraceSources.TraceLevel="High">
+                 dbg:PresentationTraceSources.TraceLevel="High">
             <TreeView.Resources>
                 <HierarchicalDataTemplate 
                     DataType="{x:Type local:Script}"
@@ -89,7 +92,9 @@
                 ItemsSource="{Binding ScriptTypes}" 
                 SelectedItem="{Binding SelectedFilter}" />
             <!--TextBlock Text="{Binding SelectedItem.Path, ElementName=FilterCtrl}"/-->
-            <ListView Grid.Row="1" ItemsSource="{Binding FilteredScripts}" >
+            <ListView Grid.Row="1" 
+                      ItemsSource="{Binding FilteredScripts}" 
+                      SelectedItem="{Binding SelectedScript}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Name}"/>

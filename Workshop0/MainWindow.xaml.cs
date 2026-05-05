@@ -83,6 +83,15 @@ namespace Workshop0
         
         public User User { get; private set; }
 
+        public Script? SelectedScript { 
+            get;
+            set
+            {
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedScript)));
+            }
+        } = null;
+
         #region File Menu
         public ICommand FileNew => new RelayCommand(
             _ => ScriptColl = new ScriptCollection(), 
@@ -124,13 +133,13 @@ namespace Workshop0
         #region Edit Menu
         private void ScriptCut_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            // TODO : Implement cut logic (copy to clipboard and remove from collection)
+            if(SelectedScript is not null)
+                ScriptColl.Scripts.Remove(SelectedScript);
         }
 
-        private void ScriptCut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true; // TODO : Check if a script is selected and can be cut
-        }
+        private void ScriptCut_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = SelectedScript is not null; // TODO : Check if a script is selected and can be cut
+        
         #endregion
 
         private void ProcessException(Exception ex, string action)
