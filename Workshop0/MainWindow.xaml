@@ -51,6 +51,11 @@
                 <MenuItem Header="_Couper" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
                 <MenuItem Header="Co_pier" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
                 <MenuItem Header="Co_ller" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V"/>
+                <Separator/>
+                <MenuItem Header="_Tout"        Command="{Binding Filter}" CommandParameter="{x:Static local:ScriptType.All}"/>
+                <MenuItem Header="_Install"     Command="{Binding Filter}" CommandParameter="{x:Static local:ScriptType.Install}"/>
+                <MenuItem Header="C_heck"       Command="{Binding Filter}" CommandParameter="{x:Static local:ScriptType.Check}"/>
+                <MenuItem Header="_Remédiation" Command="{Binding Filter}" CommandParameter="{x:Static local:ScriptType.Remediation}"/>
             </MenuItem>
             <MenuItem Header="_?">
                 <MenuItem Header="_A propose de..."/>

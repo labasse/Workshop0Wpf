@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,7 @@ namespace Workshop0
             ScriptColl = ScriptCollection.InitTestData();
             User = new();
             DataContext = this;
+            Filter = new FilterCommand(this, nameof(SelectedFilter));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -139,7 +141,32 @@ namespace Workshop0
 
         private void ScriptCut_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
             e.CanExecute = SelectedScript is not null; // TODO : Check if a script is selected and can be cut
-        
+
+        public ICommand Filter { get; private set; }
+
+        private class FilterCommand : ICommand
+        {
+            private INotifyPropertyChanged _parent;
+            private PropertyInfo _property;
+            public FilterCommand(INotifyPropertyChanged parent, string filterProperty)
+            {
+                _parent = parent;
+                _property = parent.GetType().GetProperty(filterProperty) 
+                    ?? throw new ArgumentException($"Property {filterProperty} not found on {parent.GetType().Name}");
+                _parent.PropertyChanged+=(s, e) =>
+                {
+                    if (e.PropertyName == filterProperty)
+                        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+                };
+            }
+
+            public event EventHandler? CanExecuteChanged; // A déclencher à chaque changement de filtre
+
+            public bool CanExecute(object? parameter) => !parameter?.Equals(_property.GetValue(_parent)) ?? false;
+
+            public void Execute(object? parameter) => _property.SetValue(_parent, parameter);
+        }
+
         #endregion
 
         private void ProcessException(Exception ex, string action)
