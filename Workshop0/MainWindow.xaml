@@ -41,22 +41,24 @@
         </Menu>
         <TreeView Grid.Row="1" Grid.Column="0" 
                  ItemsSource="{Binding ScriptColl.Scripts}">
-            <TreeView.ItemTemplate>
-                <DataTemplate>
+            <TreeView.Resources>
+                <DataTemplate DataType="{x:Type local:Script}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Type, StringFormat=' ({0})'}" Foreground="Gray"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:ScriptParameter}">
                     <TextBlock>
                         <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} ({1})">
+                            <MultiBinding StringFormat='{}{0} = "{1}"'>
                                 <Binding Path="Name"/>
-                                <Binding Path="Type"/>
+                                <Binding Path="Value"/>
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    <!--StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="{Binding Type, StringFormat=' ({0})'}" Foreground="Gray"/>
-                    </StackPanel-->
                 </DataTemplate>
-            </TreeView.ItemTemplate>
+            </TreeView.Resources>
         </TreeView>
         <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="auto,*">
             <ComboBox x:Name="FilterCtrl"
