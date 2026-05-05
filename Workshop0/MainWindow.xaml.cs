@@ -24,7 +24,7 @@ namespace Workshop0
             InitializeComponent();
             ScriptColl = ScriptCollection.InitTestData();
             User = new();
-            DataContext = ScriptColl;
+            DataContext = this;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
