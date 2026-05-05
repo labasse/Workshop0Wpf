@@ -44,6 +44,11 @@
                     Command="{Binding FileQuit}" CommandParameter=""
                     />
             </MenuItem>
+            <MenuItem Header="_Edition">
+                <MenuItem Header="_Couper" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="Co_pier" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Co_ller" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V"/>
+            </MenuItem>
             <MenuItem Header="_?">
                 <MenuItem Header="_A propose de..."/>
             </MenuItem>
@@ -74,6 +79,12 @@
             </TreeView.Resources>
         </TreeView>
         <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="auto,*">
+            <Grid.CommandBindings>
+                <CommandBinding 
+                    Command="ApplicationCommands.Cut" 
+                    Executed="ScriptCut_Executed"
+                    CanExecute="ScriptCut_CanExecute"/>
+            </Grid.CommandBindings>
             <ComboBox x:Name="FilterCtrl"
                 ItemsSource="{Binding ScriptTypes}" 
                 SelectedItem="{Binding SelectedFilter}" />

@@ -121,6 +121,18 @@ namespace Workshop0
         public ICommand FileQuit => new RelayCommand(_ => Close());
         #endregion
 
+        #region Edit Menu
+        private void ScriptCut_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            // TODO : Implement cut logic (copy to clipboard and remove from collection)
+        }
+
+        private void ScriptCut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true; // TODO : Check if a script is selected and can be cut
+        }
+        #endregion
+
         private void ProcessException(Exception ex, string action)
         {
             MessageBox.Show(this, $"Error {action}: {ex.Message}", action, MessageBoxButton.OK, MessageBoxImage.Error);
