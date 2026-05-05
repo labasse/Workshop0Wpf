@@ -39,16 +39,11 @@
                 <MenuItem Header="_A propose de..."/>
             </MenuItem>
         </Menu>
-        <TreeView Grid.Row="1" Grid.Column="0">
-            <TreeViewItem Header="Dossier 1">
-                <TreeViewItem Header="Fichier 1"/>
-                <TreeViewItem Header="Fichier 2"/>
-            </TreeViewItem>
-            <TreeViewItem Header="Dossier 2">
-                <TreeViewItem Header="Fichier 3"/>
-                <TreeViewItem Header="Fichier 4"/>
-            </TreeViewItem>
-        </TreeView>
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 ItemsSource="{Binding ScriptColl.Scripts}"/>
+        <!--TreeView 
+            Grid.Row="1" Grid.Column="0" 
+            ItemsSource="{Binding ScriptColl.Scripts}"/-->
         <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="auto,*">
             <ComboBox x:Name="FilterCtrl"
                 ItemsSource="{Binding ScriptTypes}" 

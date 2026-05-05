@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Xml.Serialization;
@@ -38,6 +39,9 @@ namespace Workshop0
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Path)));
             }
         }
+
+        [XmlElement("parameter")]
+        public ObservableCollection<ScriptParameter> Parameters { get; } = new ObservableCollection<ScriptParameter>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }

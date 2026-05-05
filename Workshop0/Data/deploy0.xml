@@ -1,10 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <scripts>
-	<script name="Script B" type="install" path="./scriptb.bat">		
+	<script name="Script B" type="install" path="./scriptb.bat">
+		<parameter name="paramB1" value="valueB1"/>
+		<parameter name="paramB2" value="valueB2"/>
 	</script>
 	<script name="Script A" type="check" path="./scripta.bat">
+		<parameter name="paramA1" value="valueA1"/>
+		<parameter name="paramA2" value="valueA2"/>
+		<parameter name="paramA3" value="valueA3"/>
+		<parameter name="paramA4" value="valueA4"/>
 	</script>
 	<script name="Script C" type="check" path="./scriptc.bat">
+		<parameter name="paramC1" value="valueC1"/>
+		<parameter name="paramC2" value="valueC2"/>
+		<parameter name="paramC3" value="valueC3"/>
 	</script>
 	<script name="Script D" type="remediation" path="./scriptd.bat">
 	</script>
