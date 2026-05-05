@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Workshop0"
         xmlns:models="clr-namespace:Workshop0.Models"
+        xmlns:vm="clr-namespace:Workshop0.ViewModels"
         xmlns:conv="clr-namespace:Workshop0.Views.Converters"
         xmlns:dbg="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowVM, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <conv:SpyConverter x:Key="spy"/>
         <conv:TimeSpanBrushConverter 
