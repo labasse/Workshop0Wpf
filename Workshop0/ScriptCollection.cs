@@ -10,16 +10,17 @@ namespace Workshop0
     [XmlRoot("scripts")]
     public class ScriptCollection
     {
-        public void InitTestData()
+        public static ScriptCollection InitTestData()
         {
-            Path = @"C:\Scripts\scripts.xml";
-            Scripts.Clear();
-            Scripts.Add(new Script { Name = "Install Chocolatey", Type = ScriptType.Install    , Path = @"C:\Scripts\install_chocolatey.ps1" });
-            Scripts.Add(new Script { Name = "Check Chocolatey"  , Type = ScriptType.Check      , Path = @"C:\Scripts\check_chocolatey.ps1" });
-            Scripts.Add(new Script { Name = "Remediate Chocolatey", Type = ScriptType.Remediation, Path = @"C:\Scripts\remediate_chocolatey.ps1" });
-            Scripts.Add(new Script { Name = "Install Git"       , Type = ScriptType.Install    , Path = @"C:\Scripts\install_git.ps1" });
-            Scripts.Add(new Script { Name = "Check Git"         , Type = ScriptType.Check      , Path = @"C:\Scripts\install_git.ps1" });
-            Scripts.Add(new Script { Name = "Remediate Git"     , Type = ScriptType.Remediation, Path = @"C:\Scripts\install_git.ps1" });
+            var res = new ScriptCollection() { Path = @"C:\Scripts\scripts.xml" };
+
+            res.Scripts.Add(new Script { Name = "Install Chocolatey", Type = ScriptType.Install    , Path = @"C:\Scripts\install_chocolatey.ps1" });
+            res.Scripts.Add(new Script { Name = "Check Chocolatey"  , Type = ScriptType.Check      , Path = @"C:\Scripts\check_chocolatey.ps1" });
+            res.Scripts.Add(new Script { Name = "Remediate Chocolatey", Type = ScriptType.Remediation, Path = @"C:\Scripts\remediate_chocolatey.ps1" });
+            res.Scripts.Add(new Script { Name = "Install Git"       , Type = ScriptType.Install    , Path = @"C:\Scripts\install_git.ps1" });
+            res.Scripts.Add(new Script { Name = "Check Git"         , Type = ScriptType.Check      , Path = @"C:\Scripts\install_git.ps1" });
+            res.Scripts.Add(new Script { Name = "Remediate Git"     , Type = ScriptType.Remediation, Path = @"C:\Scripts\install_git.ps1" });
+            return res;
         }
 
         public static ScriptCollection Load(Stream s)
@@ -37,7 +38,7 @@ namespace Workshop0
 
         public string Path { get; set; } = string.Empty;
 
-        public IEnumerable<object> Types         {
+        public IEnumerable<object> Types {
             get => Scripts
                 .GroupBy(s => s.Type)
                 .Select(group => new { 

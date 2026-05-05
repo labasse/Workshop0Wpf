@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Height="450" Width="800">
     <Window.Resources>
+        <local:User x:Key="user" Login="???" x:Name="user" />
         <local:TimeSpanBrushConverter 
             x:Key="TimeSpanBrushConverter" 
             WarningTime="0:0:20" WarningColor="Orange"
             AlertTime="0:0:40" AlertColor="LightSalmon"
             />
-        <CollectionViewSource Source="{Binding ScriptColl.Scripts}" 
+        <CollectionViewSource Source="{Binding Scripts}" 
                               x:Key="FilteredScripts"
                               IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
@@ -21,7 +22,7 @@
         </CollectionViewSource>
     </Window.Resources>
     <Window.Title>
-        <Binding Path="User.Login" StringFormat="{}Workshop 0 ({0})"/>
+        <Binding Path="Login" Source="{StaticResource user}" StringFormat="{}Workshop 0 ({0})"/>
     </Window.Title>
     <Grid ColumnDefinitions="25*, 50*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="3">
@@ -50,10 +51,7 @@
             </TreeViewItem>
         </TreeView>
         <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="auto,*">
-            <ComboBox 
-                ItemsSource="{Binding ScriptColl.Types}"
-                x:Name="Filter"
-                >
+            <ComboBox ItemsSource="{Binding Types}" x:Name="Filter">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -98,21 +96,21 @@
         <GridSplitter Grid.Row ="1" Grid.Column="0" 
                       ResizeDirection="Columns"/>
         <ScrollViewer Grid.Column="2" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
+            <StackPanel DataContext="{StaticResource user}">
                 <TextBlock Style="{StaticResource Title1}">
                     <TextBlock.Text>Détail</TextBlock.Text>
                 </TextBlock>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding User.Login, FallbackValue=(oups), TargetNullValue='(non connecté)'}"/>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding Login, FallbackValue=(oups), TargetNullValue='(non connecté)'}"/>
                 <TextBlock HorizontalAlignment="Center" 
-                           Text="{Binding User.LoggedDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
+                           Text="{Binding LoggedDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
                            Background="{Binding 
-                                User.LoggedDuration, 
+                                LoggedDuration, 
                                 Converter={StaticResource TimeSpanBrushConverter},
                                 FallbackValue='Coral'}"/>
                 <Label Content="Nom"/>
-                <TextBox Text="{Binding User.Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
+                <TextBox Text="{Binding Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
                 <Label Content="Type"/>
-                <ComboBox ItemsSource="{Binding ScriptTypes}"/>
+                <ComboBox/>
             </StackPanel>
         </ScrollViewer>
         <GridSplitter Grid.Row ="1" Grid.Column="1" 

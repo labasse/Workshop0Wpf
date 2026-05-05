@@ -22,9 +22,9 @@ namespace Workshop0
         public MainWindow()
         {
             InitializeComponent();
-            ScriptColl = new();
+            ScriptColl = ScriptCollection.InitTestData();
             User = new();
-            DataContext = this;
+            DataContext = ScriptColl;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
