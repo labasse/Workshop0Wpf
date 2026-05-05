@@ -32,7 +32,7 @@
     <Grid ColumnDefinitions="25*, 50*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="_Fichier">
-                <MenuItem Header="_Nouveau" Click="MenuFileNew_Click"/>
+                <MenuItem Header="_Nouveau" Command="{Binding FileNew}"/>
                 <MenuItem Header="_Ouvrir" Click="MenuFileOpen_Click"/>
                 <Separator/>
                 <MenuItem 

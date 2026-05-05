@@ -84,10 +84,8 @@ namespace Workshop0
         public User User { get; private set; }
 
         #region File Menu
-        private void MenuFileNew_Click(object sender, RoutedEventArgs e)
-        {
-            ScriptColl = new ScriptCollection();
-        }
+        public ICommand FileNew => new RelayCommand(_ => ScriptColl = new ScriptCollection());
+
         private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
         {
             var ofn = new Microsoft.Win32.OpenFileDialog()
