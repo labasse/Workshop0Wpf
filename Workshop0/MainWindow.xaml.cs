@@ -84,9 +84,11 @@ namespace Workshop0
         public User User { get; private set; }
 
         #region File Menu
-        public ICommand FileNew => new RelayCommand(_ => ScriptColl = new ScriptCollection());
+        public ICommand FileNew => new RelayCommand(
+            _ => ScriptColl = new ScriptCollection(), 
+            _ => ScriptColl.Scripts.Count > 0);
 
-        private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
+        public ICommand FileOpen => new RelayCommand(_ =>
         {
             var ofn = new Microsoft.Win32.OpenFileDialog()
             {
@@ -114,11 +116,9 @@ namespace Workshop0
                     ProcessException(xIO, "opening file");
                 }
             }
-        }
-        private void MenuFileQuit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        });
+
+        public ICommand FileQuit => new RelayCommand(_ => Close());
         #endregion
 
         private void ProcessException(Exception ex, string action)
