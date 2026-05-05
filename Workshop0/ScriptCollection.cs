@@ -15,13 +15,13 @@ namespace Workshop0
             var res = new ScriptCollection() { Path = @"C:\Scripts\scripts.xml" };
             var script = new Script { Name = "Install Chocolatey", Type = ScriptType.Install, Path = @"C:\Scripts\install_chocolatey.ps1" };
 
-            script.Parameters.Add(new ScriptParameter { Name = "Version", Value = "1.0.0" });
+            script.Parameters.Add(new ScriptParameter { Name = "Version", Value = "2.1.0" });
             script.Parameters.Add(new ScriptParameter { Name = "InstallDir", Value = @"C:\Chocolatey" });
             res.Scripts.Add(script);
 
             script = new Script { Name = "Check Chocolatey", Type = ScriptType.Check, Path = @"C:\Scripts\check_chocolatey.ps1" };
             script.Parameters.Add(new ScriptParameter { Name = "Version", Value = "1.0.0" });
-            script.Parameters.Add(new ScriptParameter { Name = "InstallDir", Value = @"C:\Chocolatey" });
+            script.Parameters.Add(new ScriptParameter { Name = "InstallDir", Value = @"C:\Chocolatey\" });
             res.Scripts.Add(script);
 
             res.Scripts.Add(new Script { Name = "Remediate Chocolatey", Type = ScriptType.Remediation, Path = @"C:\Scripts\remediate_chocolatey.ps1" });

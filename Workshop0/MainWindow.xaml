@@ -42,12 +42,15 @@
         <TreeView Grid.Row="1" Grid.Column="0" 
                  ItemsSource="{Binding ScriptColl.Scripts}">
             <TreeView.Resources>
-                <DataTemplate DataType="{x:Type local:Script}">
+                <HierarchicalDataTemplate 
+                    DataType="{x:Type local:Script}"
+                    ItemsSource="{Binding Parameters}"
+                    >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Type, StringFormat=' ({0})'}" Foreground="Gray"/>
                     </StackPanel>
-                </DataTemplate>
+                </HierarchicalDataTemplate>
                 <DataTemplate DataType="{x:Type local:ScriptParameter}">
                     <TextBlock>
                         <TextBlock.Text>
