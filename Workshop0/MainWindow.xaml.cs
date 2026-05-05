@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -29,30 +31,62 @@ namespace Workshop0
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ScriptCollection ScriptColl
+        public ICollectionView FilteredScripts
         {
-            get => field;
+            get;
             private set
             {
                 if (field != value)
                 {
                     field = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ScriptColl)));
+                    field.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Script.Type)));
+                    FilteredScripts.Filter = FilterScript;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FilteredScripts)));
                 }
+            }
+        }
+
+
+        public ScriptCollection ScriptColl
+        {
+            get;
+
+            [MemberNotNull(nameof(FilteredScripts))]
+            private set
+            {
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ScriptColl)));
+                FilteredScripts = CollectionViewSource.GetDefaultView(ScriptColl.Scripts);
             }
         }
 
         public IEnumerable<ScriptType> ScriptTypes => Enum.GetValues<ScriptType>();
 
+        public IEnumerable<ScriptType> ValidScriptTypes => ScriptTypes.Where(t=>t!=ScriptType.All);
+
+        public ScriptType SelectedFilter { 
+            get; 
+            set 
+            {
+                if (field != value)
+                {
+                    field = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedFilter)));
+                    FilteredScripts.Filter = FilterScript;
+                }
+            }
+        }
+
+        private bool FilterScript(object script) =>
+            SelectedFilter == ScriptType.All ||
+            ((Script)script).Type == SelectedFilter;
+        
         public User User { get; private set; }
 
         #region File Menu
         private void MenuFileNew_Click(object sender, RoutedEventArgs e)
         {
-            if (FindResource("user") is User user)
-            {
-                user.Login += "+";
-            }
+            ScriptColl = new ScriptCollection();
         }
         private void MenuFileOpen_Click(object sender, RoutedEventArgs e)
         {

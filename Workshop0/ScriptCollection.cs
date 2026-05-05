@@ -37,14 +37,5 @@ namespace Workshop0
         public ObservableCollection<Script> Scripts { get; set; } = new ObservableCollection<Script>();
 
         public string Path { get; set; } = string.Empty;
-
-        public IEnumerable<object> Types {
-            get => Scripts
-                .GroupBy(s => s.Type)
-                .Select(group => new { 
-                    ScriptType = group.Key, 
-                    Count = group.Count() 
-                });
-        }
     }
 }

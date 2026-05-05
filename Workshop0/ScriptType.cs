@@ -7,6 +7,7 @@ namespace Workshop0
 {
     public enum ScriptType
     {
+        All = 0,
         [XmlEnum(Name = "install"    )] Install,
         [XmlEnum(Name = "check"      )] Check,
         [XmlEnum(Name = "remediation")] Remediation

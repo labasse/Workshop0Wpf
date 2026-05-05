@@ -7,19 +7,18 @@
         mc:Ignorable="d"
         Height="450" Width="800">
     <Window.Resources>
-        <!--local:User x:Key="user" Login="???" x:Name="user" /-->
         <local:TimeSpanBrushConverter 
             x:Key="TimeSpanBrushConverter" 
             WarningTime="0:0:20" WarningColor="Orange"
             AlertTime="0:0:40" AlertColor="LightSalmon"
             />
-        <CollectionViewSource Source="{Binding ScriptColl.Scripts}" 
+        <!--CollectionViewSource Source="{Binding ScriptColl.Scripts}" 
                               x:Key="FilteredScripts"
                               IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Type"/>
             </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
+        </CollectionViewSource-->
     </Window.Resources>
     <Window.Title>
         <Binding Path="User.Login" StringFormat="{}Workshop 0 ({0})" TargetNullValue="Workshop0 (non connecté)"/>
@@ -51,22 +50,11 @@
             </TreeViewItem>
         </TreeView>
         <Grid Grid.Column="1" Grid.Row="1" RowDefinitions="auto,*">
-            <ComboBox ItemsSource="{Binding ScriptColl.Types}" x:Name="Filter">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0} ({1})">
-                                    <Binding Path="ScriptType"/>
-                                    <Binding Path="Count"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <!--TextBlock Text="{Binding SelectedItem.Path, ElementName=Filter}"/-->
-            <ListView Grid.Row="1" ItemsSource="{Binding Source={StaticResource FilteredScripts}}" >
+            <ComboBox x:Name="FilterCtrl"
+                ItemsSource="{Binding ScriptTypes}" 
+                SelectedItem="{Binding SelectedFilter}" />
+            <!--TextBlock Text="{Binding SelectedItem.Path, ElementName=FilterCtrl}"/-->
+            <ListView Grid.Row="1" ItemsSource="{Binding FilteredScripts}" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Name}"/>
@@ -110,7 +98,7 @@
                 <Label Content="Nom"/>
                 <TextBox Text="{Binding User.Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
                 <Label Content="Type"/>
-                <ComboBox ItemsSource="{Binding ScriptTypes}"/>
+                <ComboBox ItemsSource="{Binding ValidScriptTypes}"/>
             </StackPanel>
         </ScrollViewer>
         <GridSplitter Grid.Row ="1" Grid.Column="1" 
