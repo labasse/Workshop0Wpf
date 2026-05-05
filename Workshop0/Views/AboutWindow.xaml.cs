@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Workshop0
+namespace Workshop0.Views
 {
     /// <summary>
     /// Logique d'interaction pour AboutWindow.xaml

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 
-namespace Workshop0
+namespace Workshop0.ViewModels.Commands
 {
     /// <summary>
     /// A command whose sole purpose is to 

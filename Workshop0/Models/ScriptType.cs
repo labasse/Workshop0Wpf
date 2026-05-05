@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Workshop0
+namespace Workshop0.Models
 {
     public enum ScriptType
     {

@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Workshop0
+namespace Workshop0.Models
 {
     [XmlRoot("scripts")]
     public class ScriptCollection

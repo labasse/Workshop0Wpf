@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Workshop0
+namespace Workshop0.Views.Converters
 {
     public class SpyConverter : IValueConverter
     {

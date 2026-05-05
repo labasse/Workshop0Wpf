@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Timers;
 
-namespace Workshop0
+namespace Workshop0.Models
 {
     public class User : INotifyPropertyChanged
     {

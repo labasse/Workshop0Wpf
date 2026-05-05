@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Workshop0
+namespace Workshop0.Views.Converters
 {
     [ValueConversion(typeof(TimeSpan), typeof(Brush))] // Attribut (Annotation, Décorateur)
     public class TimeSpanBrushConverter : IValueConverter
