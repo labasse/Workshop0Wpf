@@ -13,14 +13,17 @@ namespace Workshop0.ViewModels
 {
     public class ScriptCollectionVM : INotifyPropertyChanged
     {
-        private IUIService _viewCtrl;
+        private IUIService _uiService;
+        private IScriptCurrencyService _scriptCurService;
 
-        public ScriptCollectionVM(IUIService ctrl)
+        public ScriptCollectionVM(IUIService ui, IScriptCurrencyService curScript)
         {
-            _viewCtrl = ctrl;
+            _uiService = ui;
+            _scriptCurService = curScript;
             ScriptColl = ScriptCollection.InitTestData();
-            User = new();
             Filter = new FilterCommand(this, nameof(SelectedFilter));
+            curScript.SelectedScriptChanged += (s, e) =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedScript)));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -74,17 +77,15 @@ namespace Workshop0.ViewModels
             SelectedFilter == ScriptType.All ||
             ((Script)script).Type == SelectedFilter;
 
-        public User User { get; private set; }
-
         public Script? SelectedScript
         {
-            get;
+            get => _scriptCurService.SelectedScript;
             set
             {
-                field = value;
+                _scriptCurService.SelectedScript = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedScript)));
             }
-        } = null;
+        }
 
         #region File Menu
         public ICommand FileNew => new RelayCommand(
@@ -93,7 +94,7 @@ namespace Workshop0.ViewModels
 
         public ICommand FileOpen => new RelayCommand(_ =>
         {
-            if (_viewCtrl.OpenFileDialog("XML files (*.xml)|*.xml") is string filePath)
+            if (_uiService.OpenFileDialog("XML files (*.xml)|*.xml") is string filePath)
             {
                 try
                 {
@@ -155,7 +156,7 @@ namespace Workshop0.ViewModels
 
         private void ProcessException(Exception ex, string action)
         {
-            _viewCtrl.ShowError($"Error {action}: {ex.Message}", action);
+            _uiService.ShowError($"Error {action}: {ex.Message}", action);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Workshop0Test
 
             writer.WriteLine(s);
             writer.Flush();
+            res.Position = 0;
             return res;
         }
 
@@ -72,16 +73,12 @@ namespace Workshop0Test
             using var s = StringToStream("""
                 <?xml version="1.0" encoding="utf-8"?>
                 <scripts>
-                    <script name="Script1" description="Description1">
-                        <parameters>
-                            <parameter name="Param1" type="string" />
-                            <parameter name="Param2" type="int" />
-                        </parameters>
+                    <script name="Script1" path="c:\foo.bat">
+                        <parameter name="Param1" type="string" />
+                        <parameter name="Param2" type="int" />
                     </script>
-                    <script name="Script2" description="Description2">
-                        <parameters>
-                            <parameter name="ParamA" type="bool" />                            
-                        </parameters>
+                    <script name="Script2" path="c:\bar.bat">
+                        <parameter name="ParamA" type="bool" />                            
                     </script>
                 </scripts>
                 """

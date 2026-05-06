@@ -27,7 +27,7 @@
                     Converter={StaticResource TimeSpanBrushConverter},
                     FallbackValue='Coral'}"/>
             <Label Content="Nom"/>
-            <TextBox Text="{Binding User.Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
+            <TextBox Text="{Binding Script.Name, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
             <Label Content="Type"/>
             <ComboBox ItemsSource="{Binding ValidScriptTypes}"/>
         </StackPanel>

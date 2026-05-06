@@ -18,6 +18,7 @@ namespace Workshop0.Windows
         public MainWindow()
         {
             ServiceContainer.Instance.UIService = this;
+            ServiceContainer.Instance.ScriptCurrencyService = new ScriptCurrencyService();
             InitializeComponent();
         }
 

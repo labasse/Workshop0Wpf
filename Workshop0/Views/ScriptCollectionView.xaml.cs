@@ -26,7 +26,8 @@ namespace Workshop0.Views
         {
             InitializeComponent();
             DataContext = _vm = new ScriptCollectionVM(
-                ServiceContainer.Instance.UIService!
+                ServiceContainer.Instance.UIService!,
+                ServiceContainer.Instance.ScriptCurrencyService!
             );
         }
 

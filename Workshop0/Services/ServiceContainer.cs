@@ -15,5 +15,6 @@ namespace Workshop0.Services
         private ServiceContainer() { }
 
         public IUIService? UIService { get; set; } = null;
+        public IScriptCurrencyService? ScriptCurrencyService { get; set; } = null;
     }
 }

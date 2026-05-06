@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+using Workshop0.ViewModels;
+using Workshop0.Services;
 
 namespace Workshop0.Views
 {
@@ -18,9 +9,13 @@ namespace Workshop0.Views
     /// </summary>
     public partial class ScriptView : UserControl
     {
+        private ScriptVM _vm;
         public ScriptView()
         {
             InitializeComponent();
+            DataContext = _vm = new ScriptVM(
+                ServiceContainer.Instance.ScriptCurrencyService!
+            );
         }
     }
 }
