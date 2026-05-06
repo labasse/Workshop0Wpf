@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace Workshop0.Models
 {
     [XmlRoot("scripts")]
-    public class ScriptCollection
+    public partial class ScriptCollection : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public static ScriptCollection InitTestData()
         {
             var res = new ScriptCollection() { Path = @"C:\Scripts\scripts.xml" };
@@ -44,6 +49,20 @@ namespace Workshop0.Models
         [XmlElement("script")]
         public ObservableCollection<Script> Scripts { get; } = new ObservableCollection<Script>();
 
-        public string Path { get; set; } = string.Empty;
+        [GeneratedRegex(@"^[a-zA-Z]:\\(?:[^\\\/:*?""<>|\r\n]+\\)*[^\\\/:*?""<>|\r\n]*$")]
+        private static partial Regex ValidWindowsPathRegex { get; }
+
+        public string Path { 
+            get;
+            set
+            {
+                if (!ValidWindowsPathRegex.IsMatch(value))
+                {
+                    throw new ArgumentException("Invalid Windows path format.", nameof(Path));
+                }
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Path)));
+            }
+        } = string.Empty;
     }
 }

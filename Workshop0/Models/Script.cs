@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace Workshop0.Models
 {
-    public class Script : INotifyPropertyChanged
+    public partial class Script : INotifyPropertyChanged
     {
         [XmlAttribute("name")]
         public string Name { 
@@ -29,12 +30,19 @@ namespace Workshop0.Models
             }
         }
 
+        [GeneratedRegex(@"^[a-zA-Z]:\\(?:[^\\\/:*?""<>|\r\n]+\\)*[^\\\/:*?""<>|\r\n]*$")]
+        private static partial Regex ValidWindowsPathRegex { get; }
+
         [XmlAttribute("path")]
         public required string Path
         {
             get => field;
             set
             {
+                if(!ValidWindowsPathRegex.IsMatch(value))
+                {
+                   throw new ArgumentException("Invalid Windows path format.", nameof(Path));
+                }
                 field = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Path)));
             }
