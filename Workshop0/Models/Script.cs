@@ -11,6 +11,8 @@ namespace Workshop0.Models
 {
     public partial class Script : INotifyPropertyChanged
     {
+        public int Id { get; set; }
+
         [XmlAttribute("name")]
         public string Name { 
             get => field; 
@@ -54,7 +56,7 @@ namespace Workshop0.Models
         }
 
         [XmlElement("parameter")]
-        public ObservableCollection<ScriptParameter> Parameters { get; } = new ObservableCollection<ScriptParameter>();
+        public virtual ObservableCollection<ScriptParameter> Parameters { get; } = new ObservableCollection<ScriptParameter>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }

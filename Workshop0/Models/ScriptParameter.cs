@@ -10,6 +10,8 @@ namespace Workshop0.Models
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public int Id { get; set; }
+
         [XmlAttribute("name")]
         public required string Name { 
             get; 
