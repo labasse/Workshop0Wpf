@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
-using Workshop0.ViewModels;
+using Workshop0.Models;
 using Workshop0.Services;
+using Workshop0.ViewModels;
 
 namespace Workshop0.Views
 {

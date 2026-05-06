@@ -21,6 +21,8 @@ namespace Workshop0.ViewModels
         }
 
         public Script? Script => _curScriptService.SelectedScript;
+        public IEnumerable<ScriptType> ValidScriptTypes =>
+            Enum.GetValues<ScriptType>().Where(t => t != ScriptType.All);
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }

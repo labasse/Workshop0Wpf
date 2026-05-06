@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
@@ -14,6 +15,10 @@ namespace Workshop0.Models
         public string Name { 
             get => field; 
             set {
+                if(value.Length is < 2 or > 20)
+                {
+                    throw new ValidationException("Le nom doit être entre 2 and 20 caractères compris.");
+                }
                 field = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
             } 
@@ -41,7 +46,7 @@ namespace Workshop0.Models
             {
                 if(!ValidWindowsPathRegex.IsMatch(value))
                 {
-                   throw new ArgumentException("Invalid Windows path format.", nameof(Path));
+                   throw new ValidationException("Format de chemin Windows non valide.");
                 }
                 field = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Path)));

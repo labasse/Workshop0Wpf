@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Workshop0.Models;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -54,7 +55,7 @@ namespace Workshop0Test
 
             var action = () => test.Path = @":\test\scripts.xml";
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ValidationException>(action);
         }
 
         [TestMethod]
@@ -64,7 +65,7 @@ namespace Workshop0Test
 
             var action = () => test.Path = "";
 
-            Assert.Throws<ArgumentException>(action);
+            Assert.Throws<ValidationException>(action);
         }
 
         [TestMethod]

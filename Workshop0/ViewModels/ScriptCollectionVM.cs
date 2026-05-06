@@ -57,8 +57,6 @@ namespace Workshop0.ViewModels
 
         public IEnumerable<ScriptType> ScriptTypes => Enum.GetValues<ScriptType>();
 
-        public IEnumerable<ScriptType> ValidScriptTypes => ScriptTypes.Where(t => t != ScriptType.All);
-
         public ScriptType SelectedFilter
         {
             get;

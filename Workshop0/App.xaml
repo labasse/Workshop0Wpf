@@ -19,9 +19,25 @@
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="LightYellow"/>
                 </Trigger>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Background" Value="LightPink"/>
+                    <Setter Property="Margin" Value="10, 5, 10, 20"/>
+                </Trigger>
             </Style.Triggers>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder/>
+                            <TextBlock Foreground="Red" FontStyle="Italic" 
+                                       Text="{Binding [0].ErrorContent}"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="ComboBox" BasedOn="{StaticResource Common}"/>
+        <Style TargetType="ListBox" BasedOn="{StaticResource Common}"/>
         <Style TargetType="ListView" BasedOn="{StaticResource Common}"/>
         <Style TargetType="GridSplitter">
             <Setter Property="Width" Value="4"/>
