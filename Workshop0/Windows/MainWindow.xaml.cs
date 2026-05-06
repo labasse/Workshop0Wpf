@@ -29,7 +29,7 @@ namespace Workshop0.Windows
         {
             var ofn = new Microsoft.Win32.OpenFileDialog()
             {
-                Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*",
+                Filter = $"{filter}|All files (*.*)|*.*",
                 InitialDirectory = Directory.GetCurrentDirectory(),
                 Title = "Open Script Collection"
             };

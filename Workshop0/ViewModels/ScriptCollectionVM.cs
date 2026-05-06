@@ -114,13 +114,19 @@ namespace Workshop0.ViewModels
             }
         });
         
+        private string? _databasePath = null;
         public ICommand ImportDb => new RelayCommand(_ =>
         {
             if (_uiService.OpenFileDialog("SQLite file (*.db)|*.db") is string filePath)
             {
+                _databasePath = filePath;
                 try
                 {
+                    using var db = new ScriptDbContext(_databasePath);
 
+                    ScriptColl = new ScriptCollection();
+                    foreach(var s in db.Scripts)
+                        ScriptColl.Scripts.Add(s);
                 }
                 catch (Exception ex)
                 {
@@ -131,15 +137,26 @@ namespace Workshop0.ViewModels
 
         public ICommand ExportDb => new RelayCommand(_ =>
         {
+            if(_databasePath is null)
+            {
+                throw new InvalidOperationException("Shouldn't occure : unexpected null databasePath");
+            }
             try
             {
-                
+                using var db = new ScriptDbContext(_databasePath);
+
+                // Clear existing data
+                db.ScriptParameters.RemoveRange(db.ScriptParameters);
+                db.Scripts.RemoveRange(db.Scripts); 
+                // Add all
+                db.Scripts.AddRange(ScriptColl.Scripts);
+                db.SaveChanges(); 
             }
             catch (Exception ex)
             {
                 ProcessException(ex, "exporting to SQLite");
             }
-        });
+        }, _ => _databasePath is not null);
 
         #endregion
 
