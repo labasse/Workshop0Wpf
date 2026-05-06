@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Workshop0.ViewModels
+namespace Workshop0.Services
 {
-    public interface IViewCtrl
+    public interface IUIService
     {
         void ShowError(string message, string title);
         string? OpenFileDialog(string filter);
-        void Quit();
+
+        // event EventArgs<ClosingEventArgs> Closing;
     }
 }

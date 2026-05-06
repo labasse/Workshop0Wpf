@@ -6,15 +6,16 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using Workshop0.Models;
+using Workshop0.Services;
 using Workshop0.ViewModels.Commands;
 
 namespace Workshop0.ViewModels
 {
-    public class MainWindowVM : INotifyPropertyChanged
+    public class ScriptCollectionVM : INotifyPropertyChanged
     {
-        private IViewCtrl _viewCtrl;
+        private IUIService _viewCtrl;
 
-        public MainWindowVM(IViewCtrl ctrl)
+        public ScriptCollectionVM(IUIService ctrl)
         {
             _viewCtrl = ctrl;
             ScriptColl = ScriptCollection.InitTestData();
@@ -113,8 +114,6 @@ namespace Workshop0.ViewModels
                 }
             }
         });
-
-        public ICommand FileQuit => new RelayCommand(_ => _viewCtrl.Quit());
         #endregion
 
         #region Edit Menu

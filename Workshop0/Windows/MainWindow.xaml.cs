@@ -5,30 +5,25 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using Workshop0.Services;
 using Workshop0.ViewModels;
 
-namespace Workshop0.Views
+namespace Workshop0.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IViewCtrl
+    public partial class MainWindow : Window, IUIService
     {
-        private readonly MainWindowVM _vm;
         public MainWindow()
         {
+            ServiceContainer.Instance.UIService = this;
             InitializeComponent();
-            DataContext = _vm = new MainWindowVM(this);
         }
 
-        private void ScriptCut_Executed(object sender, ExecutedRoutedEventArgs e) =>
-            _vm.ScriptCut_Executed();
-        private void ScriptCut_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
-            e.CanExecute = _vm.ScriptCut_CanExecute();
-
-        public void ShowError(string message, string title) => 
+        public void ShowError(string message, string title) =>
             MessageBox.Show(this, message, title, MessageBoxButton.OK, MessageBoxImage.Error);
-        
+
         public string? OpenFileDialog(string filter)
         {
             var ofn = new Microsoft.Win32.OpenFileDialog()
@@ -41,7 +36,9 @@ namespace Workshop0.Views
                 ? ofn.FileName
                 : null;
         }
-
-        public void Quit() => Close();
+        public void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

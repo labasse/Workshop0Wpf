@@ -1,0 +1,67 @@
+﻿<Window x:Class="Workshop0.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dbg="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:local="clr-namespace:Workshop0"
+        xmlns:cmd="clr-namespace:Workshop0.ViewModels.Commands"
+        xmlns:wnd="clr-namespace:Workshop0.Windows"
+        xmlns:models="clr-namespace:Workshop0.Models"
+        xmlns:vm="clr-namespace:Workshop0.ViewModels"
+        xmlns:views="clr-namespace:Workshop0.Views"
+        mc:Ignorable="d"
+        Height="450" Width="800">
+    <Window.Title>
+        <Binding 
+            Path="User.Login" 
+            StringFormat="{}Workshop 0 ({0})" 
+            TargetNullValue="Workshop0 (non connecté)"
+            dbg:PresentationTraceSources.TraceLevel="High"/>
+    </Window.Title>
+    <Window.InputBindings>
+        <!--KeyBinding Key="Q" Modifiers="Control"/-->
+        <KeyBinding Key="X" Modifiers="Control" Command="ApplicationCommands.Cut"/>
+        <KeyBinding Key="C" Modifiers="Control" Command="ApplicationCommands.Copy"/>
+        <KeyBinding Key="V" Modifiers="Control" Command="ApplicationCommands.Paste"/>
+    </Window.InputBindings>
+    <Grid ColumnDefinitions="75*, 25*" RowDefinitions="auto,*,auto">
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="_Fichier">
+                <MenuItem Header="_Nouveau" Command="cmd:ScriptOps.New"/>
+                <MenuItem Header="_Ouvrir"  Command="cmd:ScriptOps.Open"/>
+                <Separator/>
+                <MenuItem 
+                    Header="_Quitter" 
+                    InputGestureText="Ctrl+Q"
+                    Click="Quit_Click"
+                    />
+            </MenuItem>
+            <MenuItem Header="_Edition">
+                <MenuItem Header="_Couper" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="Co_pier" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Co_ller" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V"/>
+                <Separator/>
+                <MenuItem Header="_Tout"        Command="cmd:ScriptOps.Filter" CommandParameter="{x:Static models:ScriptType.All}"/>
+                <MenuItem Header="_Install"     Command="cmd:ScriptOps.Filter" CommandParameter="{x:Static models:ScriptType.Install}"/>
+                <MenuItem Header="C_heck"       Command="cmd:ScriptOps.Filter" CommandParameter="{x:Static models:ScriptType.Check}"/>
+                <MenuItem Header="_Remédiation" Command="cmd:ScriptOps.Filter" CommandParameter="{x:Static models:ScriptType.Remediation}"/>
+            </MenuItem>
+            <MenuItem Header="_?">
+                <MenuItem Header="_A propose de..."/>
+            </MenuItem>
+        </Menu>
+        <views:ScriptCollectionView Grid.Row="1" Grid.Column="0"/>
+        <views:ScriptView Grid.Row="1" Grid.Column="1"/>
+        <GridSplitter Grid.Row ="1" Grid.Column="0" 
+            ResizeDirection="Columns"/>
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <TextBlock>Prêt</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ProgressBar Width="100" Height="16" Value="50"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

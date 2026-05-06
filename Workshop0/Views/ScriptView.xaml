@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Workshop0.Views.ScriptView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:Workshop0.Views.Converters"
+             xmlns:views="clr-namespace:Workshop0.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300">
+    <UserControl.Resources>
+        <conv:TimeSpanBrushConverter 
+        x:Key="TimeSpanBrushConverter" 
+        WarningTime="0:0:20" WarningColor="Orange"
+        AlertTime="0:0:40" AlertColor="LightSalmon"
+        />  
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Style="{StaticResource Title1}">
+                <TextBlock.Text>Détail</TextBlock.Text>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding User.Login, FallbackValue=(oups), TargetNullValue='(non connecté)'}"/>
+            <TextBlock HorizontalAlignment="Center" 
+                Text="{Binding User.LoggedDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
+                Background="{Binding 
+                    User.LoggedDuration, 
+                    Converter={StaticResource TimeSpanBrushConverter},
+                    FallbackValue='Coral'}"/>
+            <Label Content="Nom"/>
+            <TextBox Text="{Binding User.Login, Delay=1000, UpdateSourceTrigger=PropertyChanged}" x:Name="EnteredName"/>
+            <Label Content="Type"/>
+            <ComboBox ItemsSource="{Binding ValidScriptTypes}"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
