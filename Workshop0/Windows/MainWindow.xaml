@@ -28,8 +28,8 @@
     <Grid ColumnDefinitions="75*, 25*" RowDefinitions="auto,*,auto">
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="_Fichier">
-                <MenuItem Header="_Nouveau" Command="cmd:ScriptOps.New"/>
-                <MenuItem Header="_Ouvrir"  Command="cmd:ScriptOps.Open"/>
+                <MenuItem Header="_Nouveau" Command="cmd:ScriptOps.New"  CommandTarget="{Binding ElementName=ScriptCollView}"/>
+                <MenuItem Header="_Ouvrir"  Command="cmd:ScriptOps.Open" CommandTarget="{Binding ElementName=ScriptCollView}"/>
                 <Separator/>
                 <MenuItem 
                     Header="_Quitter" 
@@ -51,7 +51,7 @@
                 <MenuItem Header="_A propose de..."/>
             </MenuItem>
         </Menu>
-        <views:ScriptCollectionView Grid.Row="1" Grid.Column="0"/>
+        <views:ScriptCollectionView Grid.Row="1" Grid.Column="0" x:Name="ScriptCollView"/>
         <views:ScriptView Grid.Row="1" Grid.Column="1"/>
         <GridSplitter Grid.Row ="1" Grid.Column="0" 
             ResizeDirection="Columns"/>
