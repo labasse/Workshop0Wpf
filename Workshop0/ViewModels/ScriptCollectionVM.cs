@@ -113,6 +113,34 @@ namespace Workshop0.ViewModels
                 }
             }
         });
+        
+        public ICommand ImportDb => new RelayCommand(_ =>
+        {
+            if (_uiService.OpenFileDialog("SQLite file (*.db)|*.db") is string filePath)
+            {
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    ProcessException(ex, "importing from SQLite");
+                }
+            }
+        });
+
+        public ICommand ExportDb => new RelayCommand(_ =>
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                ProcessException(ex, "exporting to SQLite");
+            }
+        });
+
         #endregion
 
         #region Edit Menu

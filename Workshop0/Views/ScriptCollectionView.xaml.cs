@@ -41,6 +41,16 @@ namespace Workshop0.Views
         private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
             e.CanExecute = _vm.FileOpen.CanExecute(e.Parameter);
 
+        private void ImportDb_Executed(object sender, ExecutedRoutedEventArgs e) =>
+            _vm.ImportDb.Execute(e.Parameter);
+        private void ImportDb_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = _vm.ImportDb.CanExecute(e.Parameter);
+
+        private void ExportDb_Executed(object sender, ExecutedRoutedEventArgs e) =>
+            _vm.ExportDb.Execute(e.Parameter);
+        private void ExportDb_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = _vm.ExportDb.CanExecute(e.Parameter);
+
         private void ScriptCut_Executed(object sender, ExecutedRoutedEventArgs e) =>
             _vm.ScriptCut_Executed();
         private void ScriptCut_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>

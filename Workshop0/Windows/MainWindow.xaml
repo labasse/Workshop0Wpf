@@ -31,6 +31,9 @@
                 <MenuItem Header="_Nouveau" Command="cmd:ScriptOps.New"  CommandTarget="{Binding ElementName=ScriptCollView}"/>
                 <MenuItem Header="_Ouvrir"  Command="cmd:ScriptOps.Open" CommandTarget="{Binding ElementName=ScriptCollView}"/>
                 <Separator/>
+                <MenuItem Header="_Import SQLite..." Command="cmd:ScriptOps.ImportDb" CommandTarget="{Binding ElementName=ScriptCollView}"/>
+                <MenuItem Header="_Export SQLite"    Command="cmd:ScriptOps.ExportDb" CommandTarget="{Binding ElementName=ScriptCollView}"/>
+                <Separator/>
                 <MenuItem 
                     Header="_Quitter" 
                     InputGestureText="Ctrl+Q"

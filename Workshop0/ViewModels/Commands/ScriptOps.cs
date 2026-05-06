@@ -10,6 +10,8 @@ namespace Workshop0.ViewModels.Commands
     {
         public static RoutedCommand New  { get; } = new RoutedCommand(nameof(New), typeof(ScriptOps));
         public static RoutedCommand Open { get; } = new RoutedCommand(nameof(Open), typeof(ScriptOps));
+        public static RoutedCommand ImportDb { get; } = new RoutedCommand(nameof(ImportDb), typeof(ScriptOps));
+        public static RoutedCommand ExportDb { get; } = new RoutedCommand(nameof(ExportDb), typeof(ScriptOps));
         public static RoutedCommand Filter { get; } = new RoutedCommand(nameof(Filter), typeof(ScriptOps));
     }
 }

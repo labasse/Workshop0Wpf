@@ -24,6 +24,8 @@
     <UserControl.CommandBindings>
         <CommandBinding Command="cmd:ScriptOps.New"    Executed="New_Executed"    CanExecute="New_CanExecute"/>
         <CommandBinding Command="cmd:ScriptOps.Open"   Executed="Open_Executed"   CanExecute="Open_CanExecute"/>
+        <CommandBinding Command="cmd:ScriptOps.ImportDb" Executed="ImportDb_Executed" CanExecute="ImportDb_CanExecute"/>
+        <CommandBinding Command="cmd:ScriptOps.ExportDb" Executed="ExportDb_Executed" CanExecute="ExportDb_CanExecute"/>
         <CommandBinding Command="cmd:ScriptOps.Filter" Executed="Filter_Executed" CanExecute="Filter_CanExecute"/>
     </UserControl.CommandBindings>
     <Grid ColumnDefinitions="20*, 40*">
